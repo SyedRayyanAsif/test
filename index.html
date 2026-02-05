@@ -44,19 +44,21 @@
     cursor: pointer;
   }
 
-  #noBtn {
-    position: absolute;
-    padding: 12px 28px;
-    font-size: 16px;
-    border-radius: 30px;
-    border: none;
-    background: white;
-    color: #b11226;
-    cursor: pointer;
-    top: 70%;
-    left: 10%;
-    z-index: 1;
-  }
+ #noBtn {
+  position: fixed;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  background: white;
+  color: #b11226;
+  cursor: pointer;
+  left: 50%;
+  top: 75%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
 
   .love {
     color: #b11226;
@@ -98,11 +100,26 @@
   const yesBtn = document.getElementById("yesBtn");
   const card = document.getElementById("card");
 
+  let isMoving = false;
+
   function moveNo() {
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    if (isMoving) return;
+    isMoving = true;
+
+    const padding = 20;
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX + padding;
+    const y = Math.random() * maxY + padding;
+
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
+
+    setTimeout(() => {
+      isMoving = false;
+    }, 200);
   }
 
   noBtn.addEventListener("mouseenter", moveNo);
@@ -112,11 +129,10 @@
     card.innerHTML = `
       <div class="love">
         YAYYYYY ❤️🎉<br><br>
-        I knew you’d say yes 😭<br>
-        You just made my whole day ❤️
+        You chose me 😭❤️<br>
+        YOU ARE MY BESTFRIENDDD!! ❤️
       </div>
     `;
-
     noBtn.style.display = "none";
     startCelebration();
   });
@@ -130,11 +146,11 @@
       heart.style.animationDuration = (2 + Math.random() * 3) + "s";
       heart.style.fontSize = (16 + Math.random() * 20) + "px";
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 5000);
     }
   }
 </script>
+
 
 </body>
 </html>
