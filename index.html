@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #b11226, #ff2e2e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 35px 25px;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+
+  h1 {
+    color: #b11226;
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  #yesBtn {
+    padding: 14px 36px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: #b11226;
+    color: white;
+    cursor: pointer;
+  }
+
+  #noBtn {
+    position: absolute;
+    padding: 12px 28px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: #b11226;
+    cursor: pointer;
+    top: 70%;
+    left: 10%;
+    z-index: 1;
+  }
+
+  .love {
+    color: #b11226;
+    font-size: 24px;
+    line-height: 1.6;
+    animation: pop 0.5s ease;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .heart {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    animation: fall 3s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Will you be my Valentine? ❤️</h1>
+  <button id="yesBtn">Yes ❤️</button>
+</div>
+
+<button id="noBtn">No 💔</button>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const card = document.getElementById("card");
+
+  function moveNo() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
+
+  yesBtn.addEventListener("click", () => {
+    card.innerHTML = `
+      <div class="love">
+        YAYYYYY ❤️🎉<br><br>
+        I knew you’d say yes 😭<br>
+        You just made my whole day ❤️
+      </div>
+    `;
+
+    noBtn.style.display = "none";
+    startCelebration();
+  });
+
+  function startCelebration() {
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+  }
+</script>
+
+</body>
+</html>
